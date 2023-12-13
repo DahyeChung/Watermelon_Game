@@ -10,7 +10,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Text scoreText;
     public Text scoreText2;// Unity Inspector에서 할당할 UI Text 요소
     public UIanim UIanim;
-    public Unit Unit;
+    //public Unit Unit;
 
     private void Awake()
     {
