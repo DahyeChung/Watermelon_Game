@@ -10,35 +10,35 @@ public class InputManager : SingletonMonoBehaviour<InputManager>
     public event EndTouchEvent OnEndTouch;
 
 
-    private TouchControls touchControls;
+    private TouchControls playerControls;
 
     private void Awake()
     {
-        touchControls = new TouchControls();
+        playerControls = new TouchControls();
     }
 
     private void OnEnable()
     {
-        touchControls.Enable();
+        playerControls.Enable();
     }
     private void OnDisable()
     {
-        touchControls.Disable();
+        playerControls.Disable();
     }
     private void Start()
     {
-        touchControls.Touch.TouchPress.started += ctx => StartTouch(ctx);
-        touchControls.Touch.TouchPress.canceled += ctx => EndTouch(ctx);
+        playerControls.Touch.TouchPress.started += ctx => StartTouch(ctx);
+        playerControls.Touch.TouchPress.canceled += ctx => EndTouch(ctx);
     }
     private void StartTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch Started" + touchControls.Touch.TouchPosition.ReadValue<Vector2>());
-        if (OnStartTouch != null) OnStartTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
+        Debug.Log("Touch Started" + playerControls.Touch.TouchPosition.ReadValue<Vector2>());
+        if (OnStartTouch != null) OnStartTouch(playerControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
     }
 
     private void EndTouch(InputAction.CallbackContext context)
     {
-        if (OnEndTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
+        if (OnEndTouch != null) OnEndTouch(playerControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
     }
 
 
