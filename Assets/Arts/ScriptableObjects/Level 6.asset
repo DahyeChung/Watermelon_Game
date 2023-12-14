@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40578daff09e98145a2e465929f039a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 46eab5fea701bd641a68e3a222138ae6, type: 3}
   m_Name: Level 6
   m_EditorClassIdentifier: 
-  UnitLevel: 6
-  UnitPrefabs: {fileID: 6813519080821623276, guid: f4004780b3d6c5744bb0fbc0f2a5ec38,
-    type: 3}
-  UnitName: 
+  UnitLevel: 0
+  UnitPrefabs: {fileID: 1064156490691130749, guid: 0d3c760b89fc43e4c86910a6d1885d0d, type: 3}
+  SpriteAnimation: {fileID: 0}
   Score: 28
