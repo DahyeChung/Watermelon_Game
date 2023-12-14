@@ -11,7 +11,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     [Space(10)]
     [Header("Audio Clip")]
-    public AudioClip BGM;
+    //public AudioClip BGM;
     public AudioClip DropSfx;
     public AudioClip MergeSfx;
 
@@ -22,19 +22,17 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         MusicVolume = 1f - PlayerPrefs.GetFloat("GameMusicVolume");
         EffectVolume = 1f - PlayerPrefs.GetFloat("GameEffectVolume");
-        // 최초로 실행했을때 PlayerPrefs에 아무도 없어서 Volume은 0이됨 그래서 1을 뺀다
     }
 
-    public void PlayBGM(AudioClip bgm, bool bLoop = true)
-    {
-        MusicPlayer.clip = bgm;
-        MusicPlayer.loop = bLoop;
-        MusicPlayer.Play();
-    }
+    //public void PlayBGM(AudioClip bgm, bool bLoop = true)
+    //{
+    //    MusicPlayer.clip = bgm;
+    //    MusicPlayer.loop = bLoop;
+    //    MusicPlayer.Play();
+    //}
 
     public void OffBGM()
     {
-        //외부 audio source접근으로 off 하지 않고 내부 오프함수로 off 하는게 명확함. (참조+추적이 쉬움)
         MusicPlayer.Stop();
     }
 
