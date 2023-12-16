@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2703440ca59a18642bf97cd0d3e2c664
+guid: 49a73b2b18097494f9149aec3aaba61e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Line_0
+      name: BellGarend1_0
       rect:
         serializedVersion: 2
-        x: 176
-        y: 1224
-        width: 1648
-        height: 42
+        x: 66
+        y: 1128
+        width: 474
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4616166cb369f904f8aff229ba914d6e
-      internalID: -654126377
+      spriteID: feefa2ee2199a5446be63d2748c25473
+      internalID: 1352932171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Line_1
+      name: BellGarend1_1
       rect:
         serializedVersion: 2
-        x: 174
-        y: 396
-        width: 1650
-        height: 54
+        x: 538
+        y: 1103
+        width: 131
+        height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,50 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9379ea8f3c51c4649b49d74bf10eb731
-      internalID: -481182604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Line_2
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 1553
-        width: 1648
-        height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d73415418f56784fa880410b8af33d6
-      internalID: 141829641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Line_3
-      rect:
-        serializedVersion: 2
-        x: 1033
-        y: 1224
-        width: 791
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 728f4a65a563f71408464abbd7563b55
-      internalID: 2088674356
+      spriteID: b2487d98b4efa9140a15012ccafdd4a3
+      internalID: -1153968376
       vertices: []
       indices: 
       edges: []
@@ -217,11 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Line_0: -1446701138
-      Line_1: -481182604
-      Line_2: 141829641
-      Line_3: 2088674356
-      Line_4: 112401297
+      BellGarend1_0: 993421951
+      BellGarend1_1: -1153968376
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

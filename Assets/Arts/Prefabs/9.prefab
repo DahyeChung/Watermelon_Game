@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 217213242266664657}
   - component: {fileID: 3211473988339133661}
   m_Layer: 0
-  m_Name: rudof1 (1)
-  m_TagString: Untagged
+  m_Name: 9
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,11 +100,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropSpeed: -1
+  impactField: 0
+  impactForce: 0
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
-  impactField: 0
-  impactForce: 0
+  dropLine: {fileID: 7282765570480403426, guid: 16c135d5f90609e4b9fa07d579dd1799, type: 3}
   isMerged: 0
 --- !u!58 &217213242266664657
 CircleCollider2D:
@@ -157,7 +158,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9e76fc21e1ec69c498863c32140e3528, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

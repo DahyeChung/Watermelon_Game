@@ -7,11 +7,13 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     [SerializeField] private Unit myUnit;
     [SerializeField] private UnitScriptableObject[] mySO;
 
+    public GameObject dropLine;
     public int maxLevel;
     private bool isDropped = true;
 
     private void Start()
     {
+        dropLine.SetActive(false);
         if (!GameManager.Instance.IsGameOver)
             NextUnit();
     }
@@ -39,6 +41,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     public void DropComplete()
     {
+        //dropLine.transform.position = Vector3.zero;
         StartCoroutine(PauseFunctionForSeconds(0.5f));
     }
 
@@ -86,6 +89,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             return null;
 
         unitInstance.Init(mySO[unitRandomIndex].UnitLevel, false);
+        dropLine.SetActive(true);
+        dropLine.transform.SetParent(unitGroups.transform);
+        dropLine.transform.localPosition = new Vector3(0, -4, 0);
         return unitInstance;
     }
 

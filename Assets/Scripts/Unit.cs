@@ -4,9 +4,9 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] private float dropSpeed = -1;
-    [SerializeField] private LayerMask layerMaskHit;
     [SerializeField] private float impactField;
     [SerializeField] private float impactForce;
+    [SerializeField] private LayerMask layerMaskHit;
 
     private new Rigidbody2D rigidbody;
     private UnitLevel Level;
@@ -35,8 +35,7 @@ public class Unit : MonoBehaviour
         this.isMovable = false;
 
         if (isMerged)
-        {   // 위에서 생긴 객체는 구독을 하며, 시뮬레이션이 아니며, 움직일 수 있다.
-            //InputManager.Instance.OnAbuttonPressed += dropping;
+        {
             rigidbody.simulated = true;
             isMovable = false;
             Debug.Log("create merged Unit");
@@ -66,6 +65,7 @@ public class Unit : MonoBehaviour
             touch = Input.GetTouch(0);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
+            touchPosition.y = 4;
 
             switch (touch.phase)
             {
@@ -77,6 +77,7 @@ public class Unit : MonoBehaviour
                     if (isTouchStarted)
                     {
                         transform.position = touchPosition;
+                        UnitManager.Instance.dropLine.transform.position = new Vector3(touchPosition.x, 0, 0);
                     }
                     break;
 
@@ -95,6 +96,7 @@ public class Unit : MonoBehaviour
     {
         isMovable = false;
         rigidbody.simulated = true;
+        UnitManager.Instance.dropLine.SetActive(false);
         UnitManager.Instance.DropComplete();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
     }
