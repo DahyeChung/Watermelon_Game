@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
             touch = Input.GetTouch(0);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
-            touchPosition.y = 4;
+            touchPosition.y = UnitManager.Instance.unitGroups.transform.position.y;
 
             switch (touch.phase)
             {
@@ -77,7 +77,9 @@ public class Unit : MonoBehaviour
                     if (isTouchStarted)
                     {
                         transform.position = touchPosition;
-                        UnitManager.Instance.dropLine.transform.position = new Vector3(touchPosition.x, 0, 0);
+                        UnitManager.Instance.dropLine.transform.position = new Vector2(touchPosition.x, 0);
+                        //UnitManager.Instance.dropLine.transform.localPosition = new Vector3(0, -4, 0);
+
                     }
                     break;
 

@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>
 {
-    [SerializeField] private Transform unitGroups;
+    public Transform unitGroups;
     [SerializeField] private Unit myUnit;
     [SerializeField] private UnitScriptableObject[] mySO;
 
     public GameObject dropLine;
+    public UIanim UIanim;
     public int maxLevel;
     private bool isDropped = true;
 
@@ -89,9 +90,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             return null;
 
         unitInstance.Init(mySO[unitRandomIndex].UnitLevel, false);
-        dropLine.SetActive(true);
-        dropLine.transform.SetParent(unitGroups.transform);
-        dropLine.transform.localPosition = new Vector3(0, -4, 0);
+        DropLineActive();
+        UIanim.ScaleAnim(unitInstance.gameObject, 1.5f);
+
         return unitInstance;
     }
 
@@ -111,4 +112,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         NextUnit();
     }
 
+    private void DropLineActive()
+    {
+        dropLine.SetActive(true);
+        dropLine.transform.SetParent(unitGroups.transform);
+        dropLine.transform.localPosition = new Vector3(0, -3, 0);
+    }
 }
