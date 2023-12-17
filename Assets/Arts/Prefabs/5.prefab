@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 134cf0e51d3c3e045a1ee5a29068c188, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8fe3cc27a90ceb743842f3fb86484c82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,6 @@ MonoBehaviour:
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
-  dropLine: {fileID: 7282765570480403426, guid: 16c135d5f90609e4b9fa07d579dd1799, type: 3}
   isMerged: 0
 --- !u!50 &2755198454458355819
 Rigidbody2D:
@@ -153,7 +152,6 @@ MonoBehaviour:
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
-  dropLine: {fileID: 0}
   isMerged: 0
 --- !u!58 &7034965246729732745
 CircleCollider2D:
