@@ -10,6 +10,8 @@ public class UIanim : MonoBehaviour
     GameObject backGroundMove;
 
 
+
+
     [SerializeField]
     private float speed;
 
@@ -20,6 +22,9 @@ public class UIanim : MonoBehaviour
         LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 2f).setEasePunch();
         //LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 2f).setEase(LeanTweenType.easeOutElastic);
     }
+
+
+
 
     public void GameOverUI()
     {

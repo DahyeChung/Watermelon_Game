@@ -4,12 +4,15 @@ using UnityEngine;
 public class UnitManager : SingletonMonoBehaviour<UnitManager>
 {
     public Transform unitGroups;
+    public GameObject prefabDisplay;
     [SerializeField] private Unit myUnit;
     [SerializeField] private UnitScriptableObject[] mySO;
 
     public GameObject dropLine;
     public UIanim UIanim;
     public int maxLevel;
+
+    private int nextRandomIndex = +1;
     private bool isDropped = true;
 
     private void Start()
@@ -17,7 +20,11 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         SoundManager.Instance.PlayBGM(SoundManager.Instance.BGM);
         dropLine.SetActive(false);
         if (!GameManager.Instance.IsGameOver)
+        {
             NextUnit();
+            SetupPrefabDisplay();
+        }
+
     }
 
     public void MergeComplete(UnitLevel unitLevel, Vector3 position)
@@ -50,6 +57,16 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     {
         yield return new WaitForSeconds(seconds);
         isDropped = true;
+        int newRandomIndex = GetNextUnitLevelIndex();
+        if (newRandomIndex >= 0 && newRandomIndex < mySO.Length) // 유효한 범위 내의 인덱스인지 검사
+        {
+            nextRandomIndex = newRandomIndex; // 현재 랜덤 인덱스를 이전에 사용한 랜덤 인덱스로 저장
+            SetupPrefabDisplay(); // UI 디스플레이 업데이트
+        }
+        else
+        {
+            Debug.LogError("Invalid random index: " + newRandomIndex);
+        }
     }
 
     //----------------Unit Random Calculator---------------------------------
@@ -68,13 +85,13 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     {
         return UnityEngine.Random.Range(0, Mathf.Min(maxLevel, 5));
     }
-
     private GameObject GetUnitPrefab(int index)
     {
         return mySO[index].UnitPrefabs;
     }
 
     //----------------Unit Generator-----------------------------------------
+
     private Unit GetUnit()
     {
         int unitRandomIndex = GetNextUnitLevelIndex();
@@ -85,11 +102,14 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         var unitPrefabs = GetUnitPrefab(unitRandomIndex);
 
+        //var unitInstance = Instantiate(unitPrefabs, prefabDisplay);
         var unitInstance = Instantiate(unitPrefabs, unitGroups).GetComponent<Unit>();
         if (unitInstance == null)
             return null;
 
         unitInstance.Init(mySO[unitRandomIndex].UnitLevel, false);
+        //NextPrefabDisplay(unitRandomIndex);
+
         DropLineActive();
         UIanim.ScaleAnim(unitInstance.gameObject, 1.5f);
 
@@ -117,5 +137,16 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         dropLine.SetActive(true);
         dropLine.transform.SetParent(unitGroups.transform);
         dropLine.transform.localPosition = new Vector3(0, -3, 0);
+    }
+    private void SetupPrefabDisplay()
+    {
+        if (prefabDisplay != null)
+        {
+            var unitPrefab = GetUnitPrefab(nextRandomIndex); // 이전에 사용한 랜덤 인덱스에 해당하는 프리팹을 가져옴
+            if (unitPrefab != null)
+            {
+                Instantiate(unitPrefab, prefabDisplay.transform); // 프리팹을 prefabDisplay의 자식으로 생성
+            }
+        }
     }
 }

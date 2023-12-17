@@ -12,10 +12,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //public TextMeshProUGUI scoreTextGameOver;
     public UIanim UIanim;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
+
 
     public void AddScore(int score)
     {
