@@ -105,7 +105,6 @@ MonoBehaviour:
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
-  dropLine: {fileID: 7282765570480403426, guid: 16c135d5f90609e4b9fa07d579dd1799, type: 3}
   isMerged: 0
 --- !u!58 &2582101647344936841
 CircleCollider2D:

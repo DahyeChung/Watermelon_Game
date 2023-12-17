@@ -13,6 +13,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.BGM);
         dropLine.SetActive(false);
         if (!GameManager.Instance.IsGameOver)
             NextUnit();
@@ -41,7 +42,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     public void DropComplete()
     {
-        //dropLine.transform.position = Vector3.zero;
         StartCoroutine(PauseFunctionForSeconds(0.5f));
     }
 

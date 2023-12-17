@@ -15,6 +15,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void Awake()
     {
         Application.targetFrameRate = 60;
+
     }
 
     public void AddScore(int score)

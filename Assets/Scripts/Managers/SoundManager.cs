@@ -11,7 +11,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     [Space(10)]
     [Header("Audio Clip")]
-    //public AudioClip BGM;
+    public AudioClip BGM;
     public AudioClip DropSfx;
     public AudioClip MergeSfx;
 
@@ -24,12 +24,12 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         EffectVolume = 1f - PlayerPrefs.GetFloat("GameEffectVolume");
     }
 
-    //public void PlayBGM(AudioClip bgm, bool bLoop = true)
-    //{
-    //    MusicPlayer.clip = bgm;
-    //    MusicPlayer.loop = bLoop;
-    //    MusicPlayer.Play();
-    //}
+    public void PlayBGM(AudioClip bgm, bool bLoop = true)
+    {
+        MusicPlayer.clip = bgm;
+        MusicPlayer.loop = bLoop;
+        MusicPlayer.Play();
+    }
 
     public void OffBGM()
     {
