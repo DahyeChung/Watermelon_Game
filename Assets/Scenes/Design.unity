@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitGroups: {fileID: 271977811}
+  prefabDisplay: {fileID: 0}
   myUnit: {fileID: 0}
   mySO:
   - {fileID: 11400000, guid: 33358e6492ce65143818773db27d3c05, type: 2}
@@ -330,6 +331,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23db362eb03378640a419fdfd3f3ed00, type: 2}
   - {fileID: 11400000, guid: 529632384b6d2e5449de27c45149b2cb, type: 2}
   - {fileID: 11400000, guid: ada6df7e7bb622245870c723472322ab, type: 2}
+  dropLine: {fileID: 0}
+  UIanim: {fileID: 0}
   maxLevel: 3
 --- !u!4 &323677911
 Transform:
@@ -435,7 +438,7 @@ MonoBehaviour:
   IsGameOver: 0
   Score: 0
   scoreText: {fileID: 0}
-  scoreText2: {fileID: 0}
+  scoreTextInGame: {fileID: 0}
   UIanim: {fileID: 0}
 --- !u!1 &585395648
 GameObject:
@@ -1236,6 +1239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicPlayer: {fileID: 1241332519}
   EffectSound: {fileID: 106053}
+  BGM: {fileID: 0}
   DropSfx: {fileID: 8300000, guid: a1f52a4229ecaad4ea01918d549fe8f3, type: 3}
   MergeSfx: {fileID: 8300000, guid: e7b6729574fdbb54a9ee0e95e7ef180d, type: 3}
 --- !u!4 &1750720609
