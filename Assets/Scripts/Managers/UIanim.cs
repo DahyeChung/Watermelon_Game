@@ -9,8 +9,22 @@ public class UIanim : MonoBehaviour
     [SerializeField]
     GameObject backGroundMove;
 
+
+
+
     [SerializeField]
     private float speed;
+
+    public void ScaleAnim(GameObject obj, float scaleSize)
+    {
+        LeanTween.cancel(obj);
+        gameObject.transform.localScale = Vector2.one;
+        LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 2f).setEasePunch();
+        //LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 2f).setEase(LeanTweenType.easeOutElastic);
+    }
+
+
+
 
     public void GameOverUI()
     {
