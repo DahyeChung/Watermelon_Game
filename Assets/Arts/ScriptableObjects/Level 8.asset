@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 8
   m_EditorClassIdentifier: 
   UnitLevel: 8
-  UnitPrefabs: {fileID: 8809201738296177091, guid: d53e7adc66345684ba3e0320239da9c9, type: 3}
+  UnitPrefabs: {fileID: 1811418048785868217, guid: c644e27a254d1e647a0d4c2ba8df5cb3, type: 3}
   SpriteAnimation: {fileID: 0}
   Score: 45

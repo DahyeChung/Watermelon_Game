@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>
 {
-    public Transform unitGroups;
+    public GameObject unitGroups;
     public GameObject prefabDisplay;
     [SerializeField] private Unit myUnit;
     [SerializeField] private UnitScriptableObject[] mySO;
@@ -22,7 +22,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         if (!GameManager.Instance.IsGameOver)
         {
             NextUnit();
-            SetupPrefabDisplay();
+
         }
 
     }
@@ -57,16 +57,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     {
         yield return new WaitForSeconds(seconds);
         isDropped = true;
-        int newRandomIndex = GetNextUnitLevelIndex();
-        if (newRandomIndex >= 0 && newRandomIndex < mySO.Length) // 유효한 범위 내의 인덱스인지 검사
-        {
-            nextRandomIndex = newRandomIndex; // 현재 랜덤 인덱스를 이전에 사용한 랜덤 인덱스로 저장
-            SetupPrefabDisplay(); // UI 디스플레이 업데이트
-        }
-        else
-        {
-            Debug.LogError("Invalid random index: " + newRandomIndex);
-        }
     }
 
     //----------------Unit Random Calculator---------------------------------
@@ -102,8 +92,12 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         var unitPrefabs = GetUnitPrefab(unitRandomIndex);
 
-        //var unitInstance = Instantiate(unitPrefabs, prefabDisplay);
-        var unitInstance = Instantiate(unitPrefabs, unitGroups).GetComponent<Unit>();
+
+        var newUnit = Instantiate(unitPrefabs, unitGroups.transform);
+
+
+        var unitInstance = newUnit.GetComponent<Unit>();
+
         if (unitInstance == null)
             return null;
 
@@ -138,15 +132,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         dropLine.transform.SetParent(unitGroups.transform);
         dropLine.transform.localPosition = new Vector3(0, -3, 0);
     }
-    private void SetupPrefabDisplay()
+
+    private void GiveUnitComponent()
     {
-        if (prefabDisplay != null)
-        {
-            var unitPrefab = GetUnitPrefab(nextRandomIndex); // 이전에 사용한 랜덤 인덱스에 해당하는 프리팹을 가져옴
-            if (unitPrefab != null)
-            {
-                Instantiate(unitPrefab, prefabDisplay.transform); // 프리팹을 prefabDisplay의 자식으로 생성
-            }
-        }
+
     }
 }

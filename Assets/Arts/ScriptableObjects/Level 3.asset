@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   UnitLevel: 3
-  UnitPrefabs: {fileID: 8990129331804821325, guid: 35f612c4f827c7f409cc415ccaa52aae, type: 3}
+  UnitPrefabs: {fileID: 3428016569499143111, guid: 52ea7845c04b0744c9d11449fca1084f, type: 3}
   SpriteAnimation: {fileID: 0}
   Score: 10

@@ -55,9 +55,7 @@ public class Unit : MonoBehaviour
 
     private void HorizontalMove()
     {
-        if (!this.isMovable)
-            return;
-        if (GameManager.Instance.IsGameOver)
+        if (!isMovable || GameManager.Instance.IsGameOver)
             return;
 
         if (Input.touchCount > 0)
@@ -71,6 +69,8 @@ public class Unit : MonoBehaviour
             {
                 case TouchPhase.Began:
                     isTouchStarted = true;
+                    transform.position = touchPosition;
+                    UnitManager.Instance.dropLine.transform.position = new Vector2(touchPosition.x, 0); ;
                     break;
 
                 case TouchPhase.Moved:
