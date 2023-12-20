@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private LayerMask layerMaskHit;
 
     private new Rigidbody2D rigidbody;
-    private UnitLevel Level;
+    public UnitLevel Level;
     private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
     private Touch touch;
@@ -29,32 +29,38 @@ public class Unit : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public void Init(UnitLevel unitLevel, bool isMerged)
+    public void InitDropUnit(UnitLevel unitLevel)
     {
         Level = unitLevel;
         this.isMovable = false;
+        rigidbody.simulated = false;
+        isMovable = true;
+        Debug.Log("create drop unit");
+    }
 
-        if (isMerged)
-        {
-            rigidbody.simulated = true;
-            isMovable = false;
-            Debug.Log("create merged Unit");
-        }
-        else
-        {
-            rigidbody.simulated = false;
-            isMovable = true;
-            Debug.Log("create new unit");
-        }
+    public void InitNextUnit(UnitLevel unitLevel)
+    {
+        Level = unitLevel;
+        this.isMovable = false;
+        rigidbody.simulated = false;
+        isMovable = false;
+        Debug.Log("create next unit");
+    }
+    public void InitMergedUnit(UnitLevel unitLevel)
+    {
+        Level = unitLevel;
+        this.isMovable = false;
+        rigidbody.simulated = true;
+        isMovable = false;
+        Debug.Log("create merged Unit");
     }
 
     private void FixedUpdate()
     {
-        TouchMove();
-        KeyMove();
+        HorizontalMove();
     }
 
-    private void TouchMove()
+    private void HorizontalMove()
     {
         if (!isMovable || GameManager.Instance.IsGameOver)
             return;
@@ -64,21 +70,21 @@ public class Unit : MonoBehaviour
             touch = Input.GetTouch(0);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
-            touchPosition.y = UnitManager.Instance.unitGroups.transform.position.y;
+            touchPosition.y = this.transform.position.y; // UnitManager.Instance.DropUnit.transform.position.y;
 
             switch (touch.phase)
             {
                 case TouchPhase.Began:
                     isTouchStarted = true;
                     transform.position = touchPosition;
-                    UnitManager.Instance.dropLine.transform.position = new Vector2(touchPosition.x, 0); ;
+                    this.transform.position = new Vector2(touchPosition.x, 0); ;
                     break;
 
                 case TouchPhase.Moved:
                     if (isTouchStarted)
                     {
                         transform.position = touchPosition;
-                        UnitManager.Instance.dropLine.transform.position = new Vector2(touchPosition.x, 0);
+                        this.transform.position = new Vector2(touchPosition.x, 0);
                         //UnitManager.Instance.dropLine.transform.localPosition = new Vector3(0, -4, 0);
 
                     }
@@ -95,46 +101,10 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void KeyMove()
-    {
-        if (!isMovable || GameManager.Instance.IsGameOver)
-            return;
-
-        float speed = 0.1f;
-
-        float moveX = 0;
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            moveX = -speed;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            moveX = speed;
-        }
-
-        if (moveX != 0)
-        {
-            Vector3 newPosition = transform.position;
-            newPosition.x += moveX;
-            transform.position = newPosition;
-            UnitManager.Instance.dropLine.transform.position = new Vector2(newPosition.x, 0);
-        }
-
-        // Check for Space key to trigger Drop
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Drop();
-        }
-    }
-
-
-
     private void Drop()
     {
         isMovable = false;
         rigidbody.simulated = true;
-        UnitManager.Instance.dropLine.SetActive(false);
         UnitManager.Instance.DropComplete();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
     }
@@ -206,7 +176,6 @@ public class Unit : MonoBehaviour
     private IEnumerator LevelUpRoutine(Vector2 contactPos)
     {
         yield return new WaitForSeconds(0.005f);
-        UnitManager.Instance.maxLevel = Mathf.Max((int)Level, UnitManager.Instance.maxLevel);
         UnitManager.Instance.MergeComplete(Level + 1, new Vector3(contactPos.x, contactPos.y, 0));
         SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
     }
