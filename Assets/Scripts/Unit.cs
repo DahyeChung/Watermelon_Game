@@ -36,6 +36,8 @@ public class Unit : MonoBehaviour
         this.isMovable = false;
         rigidbody.simulated = false;
         isMovable = true;
+
+        UnitManager.Instance.EnableDropLine();
     }
 
     public void InitNextUnit(UnitLevel unitLevel)
@@ -67,40 +69,55 @@ public class Unit : MonoBehaviour
         if (!isMovable || GameManager.Instance.IsGameOver)
             return;
 
-        if (Input.touchCount > 0)
+        if (Input.touchCount <= 0 && this.isTouchStarted == true)
         {
-            touch = Input.GetTouch(0);
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-            touchPosition.z = 0;
-            touchPosition.y = this.transform.position.y; // UnitManager.Instance.DropUnit.transform.position.y;
+            Drop();
+            isTouchStarted = false;
+            UnitManager.Instance.DisableDropLine();
+        }
 
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
+        if (Input.touchCount <= 0)
+            return;
+
+        touch = Input.GetTouch(0);
+        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+        touchPosition.z = 0;
+        touchPosition.y = this.transform.position.y;
+
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                isTouchStarted = true;
+                transform.position = touchPosition;
+                this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y);
+                break;
+
+            case TouchPhase.Moved:
+                if (!isTouchStarted)
+                {
                     isTouchStarted = true;
                     transform.position = touchPosition;
-                    this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y); ;
-                    break;
+                    this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y);
+                    isTouchStarted = true;
+                    return;
+                }
 
-                case TouchPhase.Moved:
-                    if (isTouchStarted)
-                    {
-                        transform.position = touchPosition;
-                        this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y);
-                        // UnitManager.Instance.dropLine.transform.localPosition = new Vector3(0, -4, 0);
+                transform.position = touchPosition;
+                this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y);
+                UnitManager.Instance.MovingDropLine(this.transform);
 
-                    }
-                    break;
+                break;
 
-                case TouchPhase.Ended:
-                    if (isTouchStarted)
-                    {
-                        Drop();
-                    }
-                    isTouchStarted = false;
-                    break;
-            }
+            case TouchPhase.Ended:
+                Drop();
+
+                isTouchStarted = false;
+                UnitManager.Instance.DisableDropLine();
+                break;
+            default:
+                break;
         }
+
     }
 
     private void Drop()

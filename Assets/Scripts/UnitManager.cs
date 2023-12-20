@@ -40,6 +40,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         {
             Debug.Log("Start() get unit prefab failed.");
         }
+
         this.nextUnit = Instantiate(prefab, this.nextPosition).GetComponent<Unit>();
         this.nextUnit.InitNextUnit(this.nextUnitLevel);
 
@@ -75,7 +76,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     public void DropComplete()
     {
-        this.DisableDropLine();
+        // this.DisableDropLine();
         StartCoroutine(PauseFunctionForSeconds(0.5f));
     }
 
@@ -124,12 +125,14 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         unit.InitDropUnit(this.nextUnitLevel);
 
+        // Debug.Log("enable drop line");
         // this.EnableDropLine(unit.transform);
 
         if (uiAnimation == null)
             Debug.Log("UnitManager.uiAnimation is null");
 
         uiAnimation.ScaleAnim(unit.gameObject, 1.5f);
+        this.dropLine.transform.localScale = Vector3.one;
 
         Debug.Log("created drop unit");
     }
@@ -176,15 +179,22 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         CreateUnit();
     }
 
-    private void EnableDropLine(Transform position)
+    public void EnableDropLine()
     {
         this.dropLine.SetActive(true);
-        this.dropLine.transform.SetParent(position);
-        this.dropLine.transform.localPosition = new Vector3(0, -3, 0);
+        this.dropLine.transform.position = this.dropPosition.position; // new Vector2(position.position.x, this.dropPosition.position.y);
+        // this.dropLine.transform.localPosition = new Vector3(0, -3, 0);
     }
 
-    private void DisableDropLine()
+    public void MovingDropLine(Transform position)
     {
+        this.dropLine.transform.position = new Vector2(position.position.x, this.dropPosition.position.y);
+        // this.dropLine.transform.localPosition = new Vector3(0, -3, 0);
+    }
+
+    public void DisableDropLine()
+    {
+        this.dropLine.transform.SetParent(this.dropPosition);
         this.dropLine.SetActive(false);
     }
 }
