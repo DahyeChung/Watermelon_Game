@@ -30,6 +30,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             Debug.Log("game is over");
             return;
         }
+        for (int i = 0; i < 11; i++)
+        {
+            Debug.Log("LEVEL : " + this.unitSO[i].UnitLevel);
+        }
 
         this.DisableDropLine();
 

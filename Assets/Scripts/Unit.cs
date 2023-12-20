@@ -50,6 +50,7 @@ public class Unit : MonoBehaviour
     }
     public void InitMergedUnit(UnitLevel unitLevel)
     {
+        Debug.Log("InitMergedUnit " + unitLevel);
         Level = unitLevel;
         this.isMovable = false;
         rigidbody.simulated = true;
@@ -133,6 +134,8 @@ public class Unit : MonoBehaviour
         if (this.isNext)
             return;
 
+        Debug.Log("OnCollisionEnter2D");
+
         if (!collision.collider.CompareTag("Unit"))
             return;
 
@@ -143,7 +146,7 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        if (otherUnit.Level != Level)
+        if (otherUnit.Level != this.Level)
             return;
 
         float meX = transform.position.x;
@@ -151,7 +154,7 @@ public class Unit : MonoBehaviour
         float otherX = otherUnit.transform.position.x;
         float otherY = otherUnit.transform.position.y;
 
-        if (!isMerged && !otherUnit.isMerged && (int)Level < 10)
+        if (!isMerged && !otherUnit.isMerged && Level < UnitLevel.Level10)
         {
             if (meY < otherY || (meY == otherY && meX > otherX))
             {
@@ -161,6 +164,8 @@ public class Unit : MonoBehaviour
                 Hide(otherUnit.transform.position);
                 otherUnit.Hide(transform.position);
                 GenerateNextLevelUnit(contactPos);
+
+                Debug.Log("MERGE " + this.Level + " " + otherUnit.Level);
             }
         }
     }
