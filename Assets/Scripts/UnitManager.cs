@@ -17,8 +17,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private Unit nextUnit;
 
-    private Unit dropUnit;
-
     private UnitLevel nextUnitLevel = UnitLevel.Level0;
 
     private bool isDropped = true;
@@ -29,10 +27,6 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         {
             Debug.Log("game is over");
             return;
-        }
-        for (int i = 0; i < 11; i++)
-        {
-            Debug.Log("LEVEL : " + this.unitSO[i].UnitLevel);
         }
 
         this.DisableDropLine();
@@ -53,11 +47,8 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     public void MergeComplete(UnitLevel unitLevel, Vector3 position)
     {
-        Debug.Log("MergeComplete() " + unitLevel + " " + this.MaxLevel);
         unitLevel += 1;
         this.MaxLevel = Mathf.Max((int)unitLevel, this.MaxLevel);
-
-        Debug.Log("MergeComplete() " + unitLevel + " " + this.MaxLevel);
 
         var nextLevelPrefab = GetLevelPrefab(unitLevel);
         if (nextLevelPrefab == null)
@@ -74,6 +65,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         }
 
         nextLevelUnit.InitMergedUnit(unitLevel);
+        if (unitLevel != this.unitSO[(int)unitLevel].UnitLevel)
+        {
+            Debug.Log("error");
+        }
 
         GameManager.Instance.AddScore(GetLevelScore(unitLevel));
     }
@@ -102,12 +97,11 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private UnitLevel GetNextUnitLevelIndex()
     {
-        return (UnitLevel)UnityEngine.Random.Range(0, Mathf.Min(this.MaxLevel, 5));
+        return (UnitLevel)UnityEngine.Random.Range(0, 5);
     }
 
     private GameObject GetUnitPrefab(int index)
     {
-        Debug.Log("get unit prefab : " + index);
         return unitSO[index].UnitPrefabs;
     }
 
@@ -129,22 +123,16 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         unit.InitDropUnit(this.nextUnitLevel);
 
-        // Debug.Log("enable drop line");
-        // this.EnableDropLine(unit.transform);
-
         if (uiAnimation == null)
             Debug.Log("UnitManager.uiAnimation is null");
 
         uiAnimation.ScaleAnim(unit.gameObject, 1.5f);
         this.dropLine.transform.localScale = Vector3.one;
-
-        Debug.Log("created drop unit");
     }
 
     private void CreateNextUnit()
     {
         this.nextUnitLevel = GetNextUnitLevelIndex();
-        Debug.Log("CreateNextUnit().this.nextUnitLevel : " + this.nextUnitLevel);
 
         Destroy(this.nextUnit.gameObject);
 
@@ -154,17 +142,16 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             Debug.Log("CreateNextUnit : not found prefab");
             return;
         }
-        Debug.Log("CreateNextUnit() 2");
+
         this.nextUnit = Instantiate(prefab, this.nextPosition).GetComponent<Unit>();
         if (this.nextUnit == null)
         {
             Debug.Log("CreateNextUnit : unit instantiate failed.");
             return;
         }
-        Debug.Log("CreateNextUnit() 3");
+
         this.nextUnit.InitNextUnit(this.nextUnitLevel);
-        Debug.Log("CreateNextUnit() 4");
-        Debug.Log("created next unit");
+
     }
 
     private void CreateUnit()
@@ -186,14 +173,11 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     public void EnableDropLine()
     {
         this.dropLine.SetActive(true);
-        this.dropLine.transform.position = this.dropPosition.position; // new Vector2(position.position.x, this.dropPosition.position.y);
-        // this.dropLine.transform.localPosition = new Vector3(0, -3, 0);
+        this.dropLine.transform.position = new Vector2(this.dropPosition.position.x, this.dropPosition.position.y - 3);
     }
-
     public void MovingDropLine(Transform position)
     {
-        this.dropLine.transform.position = new Vector2(position.position.x, this.dropPosition.position.y);
-        // this.dropLine.transform.localPosition = new Vector3(0, -3, 0);
+        this.dropLine.transform.position = new Vector2(position.position.x, this.dropPosition.position.y - 3);
     }
 
     public void DisableDropLine()

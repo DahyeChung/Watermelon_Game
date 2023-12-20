@@ -105,7 +105,9 @@ MonoBehaviour:
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
+  Level: 0
   isMerged: 0
+  IsInit: 0
 --- !u!58 &2582101647344936841
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,9 +140,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0027414523}
+  m_Offset: {x: 0, y: 0.023517251}
   serializedVersion: 2
-  m_Radius: 1.4815967
+  m_Radius: 1.4553379
 --- !u!50 &8544826531411785323
 Rigidbody2D:
   serializedVersion: 4

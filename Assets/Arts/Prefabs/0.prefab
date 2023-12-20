@@ -105,8 +105,9 @@ MonoBehaviour:
   layerMaskHit:
     serializedVersion: 2
     m_Bits: 0
-  dropLine: {fileID: 7282765570480403426, guid: 16c135d5f90609e4b9fa07d579dd1799, type: 3}
+  Level: 0
   isMerged: 0
+  IsInit: 0
 --- !u!58 &4485642637977448918
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,9 +140,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.031599518}
   serializedVersion: 2
-  m_Radius: 0.33
+  m_Radius: 0.28523403
 --- !u!50 &2301643952033264992
 Rigidbody2D:
   serializedVersion: 4

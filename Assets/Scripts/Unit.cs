@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
     private bool isTouchStarted = false;
     private bool isMovable = false;
     private bool isNext = false;
+    public bool IsInit = false;
     private float deadTime;
 
     private void Awake()
@@ -33,10 +34,9 @@ public class Unit : MonoBehaviour
     public void InitDropUnit(UnitLevel unitLevel)
     {
         Level = unitLevel;
-        this.isMovable = false;
         rigidbody.simulated = false;
         isMovable = true;
-
+        IsInit = true;
         UnitManager.Instance.EnableDropLine();
     }
 
@@ -45,16 +45,15 @@ public class Unit : MonoBehaviour
         this.isNext = true;
         Level = unitLevel;
         this.isMovable = false;
+        IsInit = true;
         rigidbody.simulated = false;
-        isMovable = false;
     }
     public void InitMergedUnit(UnitLevel unitLevel)
     {
-        Debug.Log("InitMergedUnit " + unitLevel);
         Level = unitLevel;
         this.isMovable = false;
+        IsInit = true;
         rigidbody.simulated = true;
-        isMovable = false;
     }
 
     private void FixedUpdate()
@@ -134,8 +133,6 @@ public class Unit : MonoBehaviour
         if (this.isNext)
             return;
 
-        Debug.Log("OnCollisionEnter2D");
-
         if (!collision.collider.CompareTag("Unit"))
             return;
 
@@ -147,6 +144,9 @@ public class Unit : MonoBehaviour
         }
 
         if (otherUnit.Level != this.Level)
+            return;
+
+        if ((!this.IsInit || !otherUnit.IsInit) && this.Level == UnitLevel.Level0)
             return;
 
         float meX = transform.position.x;
@@ -164,8 +164,6 @@ public class Unit : MonoBehaviour
                 Hide(otherUnit.transform.position);
                 otherUnit.Hide(transform.position);
                 GenerateNextLevelUnit(contactPos);
-
-                Debug.Log("MERGE " + this.Level + " " + otherUnit.Level);
             }
         }
     }
@@ -190,7 +188,7 @@ public class Unit : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
@@ -203,7 +201,7 @@ public class Unit : MonoBehaviour
     private IEnumerator LevelUpRoutine(Vector2 contactPos)
     {
         yield return new WaitForSeconds(0.005f);
-        UnitManager.Instance.MergeComplete(Level + 1, new Vector3(contactPos.x, contactPos.y, 0));
+        UnitManager.Instance.MergeComplete(Level, new Vector3(contactPos.x, contactPos.y, 0));
         SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
     }
 
@@ -222,6 +220,12 @@ public class Unit : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, impactField);
+    }
+
+    //-------------------------------------------------------------------------------------------------
+    public void ColorChange()
+    {
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
