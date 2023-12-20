@@ -17,6 +17,7 @@ public class Unit : MonoBehaviour
     public bool isMerged;
     private bool isTouchStarted = false;
     private bool isMovable = false;
+    private bool isNext = false;
     private float deadTime;
 
     private void Awake()
@@ -35,16 +36,15 @@ public class Unit : MonoBehaviour
         this.isMovable = false;
         rigidbody.simulated = false;
         isMovable = true;
-        Debug.Log("create drop unit");
     }
 
     public void InitNextUnit(UnitLevel unitLevel)
     {
+        this.isNext = true;
         Level = unitLevel;
         this.isMovable = false;
         rigidbody.simulated = false;
         isMovable = false;
-        Debug.Log("create next unit");
     }
     public void InitMergedUnit(UnitLevel unitLevel)
     {
@@ -52,12 +52,14 @@ public class Unit : MonoBehaviour
         this.isMovable = false;
         rigidbody.simulated = true;
         isMovable = false;
-        Debug.Log("create merged Unit");
     }
 
     private void FixedUpdate()
     {
-        HorizontalMove();
+        if (!isNext)
+        {
+            HorizontalMove();
+        }
     }
 
     private void HorizontalMove()
@@ -77,15 +79,15 @@ public class Unit : MonoBehaviour
                 case TouchPhase.Began:
                     isTouchStarted = true;
                     transform.position = touchPosition;
-                    this.transform.position = new Vector2(touchPosition.x, 0); ;
+                    this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y); ;
                     break;
 
                 case TouchPhase.Moved:
                     if (isTouchStarted)
                     {
                         transform.position = touchPosition;
-                        this.transform.position = new Vector2(touchPosition.x, 0);
-                        //UnitManager.Instance.dropLine.transform.localPosition = new Vector3(0, -4, 0);
+                        this.transform.position = new Vector2(touchPosition.x, UnitManager.Instance.dropPosition.position.y);
+                        // UnitManager.Instance.dropLine.transform.localPosition = new Vector3(0, -4, 0);
 
                     }
                     break;
@@ -111,6 +113,9 @@ public class Unit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (this.isNext)
+            return;
+
         if (!collision.collider.CompareTag("Unit"))
             return;
 
