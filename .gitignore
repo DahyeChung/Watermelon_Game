@@ -77,6 +77,7 @@ Library Temp Logs UserSettings obj
 *.DotSettings .vsconfig
 *.vs
 .DS_Store [Tt]humbs.db
+.vsconfig
 
 //# Dahye Nintendo
 //*.mp4

@@ -35,11 +35,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             scoreTextInGame.text = Score.ToString();
             UIanim.ScaleAnim(scoreText, 1.5f);
         }
-
-        //if (scoreTextGameOver != null)
-        //{
-        //    scoreTextGameOver.text = Score.ToString();
-        //}
     }
 
     public void GameOver()

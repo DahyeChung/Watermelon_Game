@@ -50,10 +50,11 @@ public class Unit : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HorizontalMove();
+        TouchMove();
+        KeyMove();
     }
 
-    private void HorizontalMove()
+    private void TouchMove()
     {
         if (!isMovable || GameManager.Instance.IsGameOver)
             return;
@@ -93,6 +94,41 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
+    private void KeyMove()
+    {
+        if (!isMovable || GameManager.Instance.IsGameOver)
+            return;
+
+        float speed = 0.1f;
+
+        float moveX = 0;
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            moveX = -speed;
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            moveX = speed;
+        }
+
+        if (moveX != 0)
+        {
+            Vector3 newPosition = transform.position;
+            newPosition.x += moveX;
+            transform.position = newPosition;
+            UnitManager.Instance.dropLine.transform.position = new Vector2(newPosition.x, 0);
+        }
+
+        // Check for Space key to trigger Drop
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Drop();
+        }
+    }
+
+
 
     private void Drop()
     {
