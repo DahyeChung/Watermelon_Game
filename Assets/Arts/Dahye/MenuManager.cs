@@ -93,7 +93,7 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.SetEffectVolume(0.5f);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         settingCanvas.SetActive(true);
-        LeanTween.moveLocal(settingCanvas, new Vector3(0f, 2f, 0f), 0.4f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.moveLocal(settingCanvas, new Vector3(0f, 2f, 0f), 0.01f).setEase(LeanTweenType.easeOutBounce);
         Time.timeScale = 0f;
         Debug.Log("∆€¡Ó  ≥°");
 

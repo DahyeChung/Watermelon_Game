@@ -88,6 +88,11 @@ public class Unit : MonoBehaviour
 
         touch = Input.GetTouch(0);
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+        // Limit touch top in order to click setting menu
+        if (touchPosition.y > 3.5)
+            return;
+
         touchPosition.z = 0;
         touchPosition.y = this.transform.position.y;
 
