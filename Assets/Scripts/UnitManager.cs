@@ -11,7 +11,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     [SerializeField] private UnitScriptableObject[] unitSO;
 
-    [SerializeField] private UIanim uiAnimation;
+    [SerializeField] private MenuManager Menu;
 
     public GameObject dropLine;
 
@@ -123,10 +123,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         unit.InitDropUnit(this.nextUnitLevel);
 
-        if (uiAnimation == null)
+        if (Menu == null)
             Debug.Log("UnitManager.uiAnimation is null");
 
-        uiAnimation.ScaleAnim(unit.gameObject, 1.5f);
+        Menu.ScaleAnim(unit.gameObject, 1.5f);
         this.dropLine.transform.localScale = Vector3.one;
     }
 

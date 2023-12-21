@@ -10,7 +10,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //[SerializeField] private GameObject scoreResults;
     public TextMeshProUGUI scoreTextInGame;
     public TextMeshProUGUI scoreTextGameOver;
-    public UIanim UIanim;
+    public MenuManager Menu;
 
     //ccy추가
 
@@ -19,14 +19,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // 게임이 일시 정지 상태인지 추적
     private bool isPaused = false;
+    public bool isSettingOn = false;
 
     //ccy
 
     public void AddScore(int score)
     {
-        Debug.Log("From" + score);
         this.Score += score;
-        Debug.Log("To" + score);
         UpdateScoreUI();
     }
 
@@ -36,7 +35,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             scoreTextInGame.text = Score.ToString();
             scoreTextGameOver.text = Score.ToString();
-            UIanim.ScaleAnim(scorePoints, 1.5f);
+            Menu.ScaleAnim(scorePoints, 1.5f);
         }
     }
 
@@ -44,7 +43,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         IsGameOver = true;
         scoreTextInGame = scoreTextGameOver;
-        UIanim.GameOverUI();
+        Menu.OnGameOverCanvas();
         Debug.Log("Game Over");
     }
 

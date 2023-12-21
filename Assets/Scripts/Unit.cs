@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour
 
     public bool isMerged;
     private bool isTouchStarted = false;
-    private bool isMovable = false;
+    public bool isMovable = false;
     private bool isNext = false;
     public bool IsInit = false;
     private float deadTime;
