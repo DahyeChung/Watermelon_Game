@@ -1,0 +1,410 @@
+fileFormatVersion: 2
+guid: 9d35f310ef2c11048af4631c4ed0a758
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UnitBlink_1
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 1669
+        width: 224
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5bb3a0ecc4dbc46a8eb752e375a1c8
+      internalID: 84042394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_3
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 1586
+        width: 240
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ddd72195bf945429ed513414825fd1
+      internalID: 244685220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_13
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1199
+        width: 357
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 049ff79e5f29eb144bd673f5099297b1
+      internalID: 594856785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_23
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 1172
+        width: 290
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63535c636c3612429c6341e95e877b3
+      internalID: 1538985577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_38
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 589
+        width: 584
+        height: 584
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c52ee8276012f840815d0a959d6d4b8
+      internalID: 491374531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_39
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 747
+        width: 400
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceae9368810975e42bca81e00e464190
+      internalID: -570649074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_42
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 1008
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01058be934d90d54788e4daf3332d816
+      internalID: -1870079357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_43
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 1001
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c9aaee649195e94d88ea5ec854ec32d
+      internalID: -1481389960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_48
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 562
+        width: 153
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23dc68e422d56054b8dcd52982f9048e
+      internalID: 1704048015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnitBlink_58
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 48
+        width: 487
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2a30a6350eec7a459f0fc1637500013
+      internalID: 2035329222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      UnitBlink_0: -1986292905
+      UnitBlink_1: 84042394
+      UnitBlink_10: -1866099974
+      UnitBlink_11: 1482608225
+      UnitBlink_12: 1323198907
+      UnitBlink_13: 594856785
+      UnitBlink_14: 1169561893
+      UnitBlink_15: -274382025
+      UnitBlink_16: 854487852
+      UnitBlink_17: -799565586
+      UnitBlink_18: 1140012411
+      UnitBlink_19: 233506159
+      UnitBlink_2: -477578408
+      UnitBlink_20: -831005329
+      UnitBlink_21: -254579645
+      UnitBlink_22: 933889377
+      UnitBlink_23: 1538985577
+      UnitBlink_24: 799521292
+      UnitBlink_25: -2075860406
+      UnitBlink_26: -2004243217
+      UnitBlink_27: 1501491242
+      UnitBlink_28: 1144406298
+      UnitBlink_29: 817194235
+      UnitBlink_3: 244685220
+      UnitBlink_30: 1569707181
+      UnitBlink_31: -19423320
+      UnitBlink_32: 2049117238
+      UnitBlink_33: -1865580403
+      UnitBlink_34: -1678542815
+      UnitBlink_35: -575433909
+      UnitBlink_36: 206428531
+      UnitBlink_37: 1856437315
+      UnitBlink_38: 491374531
+      UnitBlink_39: -570649074
+      UnitBlink_4: 1809383764
+      UnitBlink_40: 942741913
+      UnitBlink_41: 941667714
+      UnitBlink_42: -1870079357
+      UnitBlink_43: -1481389960
+      UnitBlink_44: -1362183475
+      UnitBlink_45: -574736633
+      UnitBlink_46: -446546555
+      UnitBlink_47: -1409151
+      UnitBlink_48: 1704048015
+      UnitBlink_49: 499680489
+      UnitBlink_5: -1311838709
+      UnitBlink_50: -1645593231
+      UnitBlink_51: 390518570
+      UnitBlink_52: 198662769
+      UnitBlink_53: 62360196
+      UnitBlink_54: 1067579639
+      UnitBlink_55: 1826328576
+      UnitBlink_56: -1806783725
+      UnitBlink_57: 282839861
+      UnitBlink_58: 2035329222
+      UnitBlink_59: 870776712
+      UnitBlink_6: 577424964
+      UnitBlink_7: 1132552315
+      UnitBlink_8: 1988614430
+      UnitBlink_9: -225772457
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
