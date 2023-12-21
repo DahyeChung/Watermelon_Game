@@ -23,7 +23,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private void Start()
     {
-        if (GameManager.Instance.IsGameOver)
+        if (GameManager_DH.Instance.IsGameOver)
         {
             Debug.Log("game is over");
             return;
@@ -70,7 +70,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             Debug.Log("error");
         }
 
-        GameManager.Instance.AddScore(GetLevelScore(unitLevel));
+        GameManager_DH.Instance.AddScore(GetLevelScore(unitLevel));
     }
 
     public void DropComplete()

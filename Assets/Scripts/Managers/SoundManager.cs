@@ -14,6 +14,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     public AudioClip BGM;
     public AudioClip DropSfx;
     public AudioClip MergeSfx;
+    public AudioClip FinishBell;
 
     float MusicVolume = 1f;
     float EffectVolume = 1f;

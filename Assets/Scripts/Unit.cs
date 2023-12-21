@@ -16,9 +16,16 @@ public class Unit : MonoBehaviour
 
     public bool isMerged;
     private bool isTouchStarted = false;
-    public bool isMovable = false;
+    private bool isMovable = false;
+    public bool IsMovable
+    {
+        get { return isMovable; }
+        set { isMovable = value; }
+    }
+
     private bool isNext = false;
     public bool IsInit = false;
+
     private float deadTime;
 
     private void Awake()
@@ -66,7 +73,7 @@ public class Unit : MonoBehaviour
 
     private void HorizontalMove()
     {
-        if (!isMovable || GameManager.Instance.IsGameOver)
+        if (!isMovable || GameManager_DH.Instance.IsGameOver)
             return;
 
         if (Input.touchCount <= 0 && this.isTouchStarted == true)
@@ -223,32 +230,29 @@ public class Unit : MonoBehaviour
     }
 
     //-------------------------------------------------------------------------------------------------
-    public void ColorChange()
-    {
 
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Finish")
+        if (collision.CompareTag("Finish"))
         {
-            Debug.Log("Line Touched");
             deadTime += Time.deltaTime;
-            if (deadTime > .5)
+            if (deadTime > 2)
             {
                 spriteRenderer.color = Color.red;
+
             }
-            if (deadTime > 1)
+            if (deadTime > 2.5)
             {
                 Destroy(gameObject);
-                GameManager.Instance.GameOver();
+                GameManager_DH.Instance.GameOver();
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Finish")
+        if (collision.CompareTag("Finish"))
         {
             deadTime = 0;
             spriteRenderer.color = Color.white;
