@@ -6,10 +6,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public bool IsGameOver;
     public int Score;
 
-    [SerializeField]
-    GameObject scoreText;
+    [SerializeField] private GameObject scorePoints; // Use for score animation
+    //[SerializeField] private GameObject scoreResults;
     public TextMeshProUGUI scoreTextInGame;
-    //public TextMeshProUGUI scoreTextGameOver;
+    public TextMeshProUGUI scoreTextGameOver;
     public UIanim UIanim;
 
     //ccy추가
@@ -33,16 +33,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (scoreTextInGame != null)
         {
             scoreTextInGame.text = Score.ToString();
-            UIanim.ScaleAnim(scoreText, 1.5f);
+            scoreTextGameOver.text = Score.ToString();
+            UIanim.ScaleAnim(scorePoints, 1.5f);
         }
     }
 
     public void GameOver()
     {
         IsGameOver = true;
+        scoreTextInGame = scoreTextGameOver;
         UIanim.GameOverUI();
         Debug.Log("Game Over");
     }
+
 
     //ccy
     // 일시 정지 및 재개를 위한 메소드
