@@ -49,6 +49,9 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     {
         unitLevel += 1;
         this.MaxLevel = Mathf.Max((int)unitLevel, this.MaxLevel);
+        //Max Level
+        //if (this.MaxLevel < 3)
+        //    this.MaxLevel = Mathf.Max((int)unitLevel, this.MaxLevel);
 
         var nextLevelPrefab = GetLevelPrefab(unitLevel);
         if (nextLevelPrefab == null)
@@ -98,6 +101,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     private UnitLevel GetNextUnitLevelIndex()
     {
         return (UnitLevel)UnityEngine.Random.Range(0, 5);
+        //return (UnitLevel)UnityEngine.Random.Range(0, this.MaxLevel + 2);
     }
 
     private GameObject GetUnitPrefab(int index)

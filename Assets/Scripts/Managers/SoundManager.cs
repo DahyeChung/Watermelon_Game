@@ -47,7 +47,6 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         MusicVolume = v;
         MusicPlayer.volume = v;
-        // 미리 1을 빼놔서 저장할때는 1f - v로 다시 빼서 넣어야한다
         PlayerPrefs.SetFloat("GameMusicVolume", 1f - v);
     }
 
@@ -88,6 +87,17 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         MusicPlayer.UnPause();
     }
+    public void PauseSFX()
+    {
+        EffectSound.Pause();
+    }
+
+    public void ResumeSFX()
+    {
+        EffectSound.UnPause();
+    }
+
+
 
 
 }

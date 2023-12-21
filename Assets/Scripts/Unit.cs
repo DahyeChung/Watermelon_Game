@@ -17,16 +17,12 @@ public class Unit : MonoBehaviour
     public bool isMerged;
     private bool isTouchStarted = false;
     private bool isMovable = false;
-    public bool IsMovable
-    {
-        get { return isMovable; }
-        set { isMovable = value; }
-    }
-
     private bool isNext = false;
     public bool IsInit = false;
 
     private float deadTime;
+
+    private MenuManager sfx;
 
     private void Awake()
     {
@@ -37,6 +33,8 @@ public class Unit : MonoBehaviour
         rigidbody.velocity = new Vector3(0, dropSpeed, 0);
         circleCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        sfx = GetComponent<MenuManager>();
+
     }
     public void InitDropUnit(UnitLevel unitLevel)
     {
@@ -137,7 +135,11 @@ public class Unit : MonoBehaviour
         isMovable = false;
         rigidbody.simulated = true;
         UnitManager.Instance.DropComplete();
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
+        if (!sfx.canPlaySFX)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -214,7 +216,11 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds(0.005f);
         UnitManager.Instance.MergeComplete(Level, new Vector3(contactPos.x, contactPos.y, 0));
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
+        if (!sfx.canPlaySFX)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
+            Debug.Log("Unit state is : " + sfx.canPlaySFX);
+        }
     }
 
     private void Explosion()
