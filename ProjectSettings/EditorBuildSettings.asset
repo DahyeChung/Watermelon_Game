@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/_Scenes/Home.unity
     guid: bf5f6af9b36e75e45b9461d8aab55468
   - enabled: 1
-    path: Assets/_Scenes/Main.unity
+    path: Assets/_Scenes/LightMode.unity
     guid: b4039b11cc7d60e4395d69213c2e9e6e
   m_configObjects: {}
