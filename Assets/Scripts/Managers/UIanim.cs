@@ -22,6 +22,12 @@ public class UIanim : MonoBehaviour
         LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 1f).setEasePunch();
         //LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 2f).setEase(LeanTweenType.easeOutElastic);
     }
+    public void ButtonScaleAnim()
+    {
+        LeanTween.cancel(gameObject);
+        gameObject.transform.localScale = Vector2.one;
+        LeanTween.scale(gameObject, new Vector2(1.2f, 1.2f), 2f).setEase(LeanTweenType.easeOutElastic);
+    }
 
 
 

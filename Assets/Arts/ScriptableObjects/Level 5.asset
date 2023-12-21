@@ -15,4 +15,4 @@ MonoBehaviour:
   UnitLevel: 5
   UnitPrefabs: {fileID: 1978272650872239439, guid: c92b658b691be144987cf2b768a2af3d, type: 3}
   SpriteAnimation: {fileID: 0}
-  Score: 21
+  Score: 15

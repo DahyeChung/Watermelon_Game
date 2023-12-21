@@ -24,7 +24,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void AddScore(int score)
     {
+        Debug.Log("From" + score);
         this.Score += score;
+        Debug.Log("To" + score);
         UpdateScoreUI();
     }
 
