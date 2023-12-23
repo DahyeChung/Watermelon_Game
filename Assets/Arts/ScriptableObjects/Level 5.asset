@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46eab5fea701bd641a68e3a222138ae6, type: 3}
   m_Name: Level 5
   m_EditorClassIdentifier: 
-  UnitLevel: 5
-  UnitPrefabs: {fileID: 1978272650872239439, guid: c92b658b691be144987cf2b768a2af3d, type: 3}
-  SpriteAnimation: {fileID: 0}
-  Score: 15
+  unitLevel: 5
+  unitPrefabs: {fileID: 1978272650872239439, guid: c92b658b691be144987cf2b768a2af3d, type: 3}
+  spriteAnimation: {fileID: 244685220, guid: 9d35f310ef2c11048af4631c4ed0a758, type: 3}
+  score: 15
+  createPercent: 0
+  canCreate: 0

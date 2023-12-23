@@ -19,9 +19,11 @@ public enum UnitLevel
 [CreateAssetMenu]
 public class UnitScriptableObject : ScriptableObject
 {
-    public UnitLevel UnitLevel;
-    public GameObject UnitPrefabs;
-    public SpriteRenderer SpriteAnimation;
-    public int Score;
+    public UnitLevel unitLevel;
+    public GameObject unitPrefabs;
+    public Sprite spriteAnimation;
+    public int score;
+    public int createPercent;
+    public bool canCreate;
 }
 

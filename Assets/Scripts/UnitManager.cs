@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>
@@ -21,13 +22,22 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private bool isDropped = true;
 
+    private Dictionary<int, UnitLevel> unitRandom = new();
+
     private void Start()
     {
-        if (GameManager_DH.Instance.IsGameOver)
+
+        int percent = 0;
+        foreach (var unit in unitSO)
         {
-            Debug.Log("game is over");
-            return;
+            if (!unit.canCreate)
+                continue;
+            percent += unit.createPercent;
+            unitRandom.Add(percent, unit.unitLevel);
         }
+
+        if (GameManager_DH.Instance.IsGameOver)
+            return;
 
         this.DisableDropLine();
 
@@ -68,7 +78,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         }
 
         nextLevelUnit.InitMergedUnit(unitLevel);
-        if (unitLevel != this.unitSO[(int)unitLevel].UnitLevel)
+        if (unitLevel != this.unitSO[(int)unitLevel].unitLevel)
         {
             Debug.Log("error");
         }
@@ -90,23 +100,34 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private GameObject GetLevelPrefab(UnitLevel level)
     {
-        return level > UnitLevel.Level10 ? unitSO[(int)UnitLevel.Level10].UnitPrefabs : unitSO[(int)level].UnitPrefabs;
+        return level > UnitLevel.Level10 ? unitSO[(int)UnitLevel.Level10].unitPrefabs : unitSO[(int)level].unitPrefabs;
     }
 
     private int GetLevelScore(UnitLevel level)
     {
-        return unitSO[(int)level].Score;
+        return unitSO[(int)level].score;
     }
 
     private UnitLevel GetNextUnitLevelIndex()
     {
-        return (UnitLevel)UnityEngine.Random.Range(0, 5);
+        int random = Random.Range(0, 100);
+        int calculateNum = 0;
+        foreach (var dic in unitRandom)
+        {
+            calculateNum = dic.Key;
+            if (calculateNum >= random)
+            {
+                return dic.Value;
+            }
+        }
+        return UnitLevel.Level0;
+        //return (UnitLevel)UnityEngine.Random.Range(0, 5);
         //return (UnitLevel)UnityEngine.Random.Range(0, this.MaxLevel + 2);
     }
 
     private GameObject GetUnitPrefab(int index)
     {
-        return unitSO[index].UnitPrefabs;
+        return unitSO[index].unitPrefabs;
     }
 
     private void CreateDropUnit()
@@ -189,4 +210,5 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         this.dropLine.transform.SetParent(this.dropPosition);
         this.dropLine.SetActive(false);
     }
+
 }

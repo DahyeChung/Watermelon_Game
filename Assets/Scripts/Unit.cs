@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    [SerializeField] private UnitScriptableObject[] unitSO;
     [SerializeField] private float dropSpeed = -1;
     [SerializeField] private float impactField;
     [SerializeField] private float impactForce;
@@ -21,8 +22,8 @@ public class Unit : MonoBehaviour
     public bool IsInit = false;
 
     private float deadTime;
+    private Sprite originalSprite;
 
-    private MenuManager sfx;
 
     private void Awake()
     {
@@ -33,7 +34,6 @@ public class Unit : MonoBehaviour
         rigidbody.velocity = new Vector3(0, dropSpeed, 0);
         circleCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        sfx = GetComponent<MenuManager>();
 
     }
     public void InitDropUnit(UnitLevel unitLevel)
@@ -135,11 +135,11 @@ public class Unit : MonoBehaviour
         isMovable = false;
         rigidbody.simulated = true;
         UnitManager.Instance.DropComplete();
-        if (!sfx.canPlaySFX)
+        if (!MenuManager.Instance.canPlaySFX)
         {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         }
-
+        ChangeSprite();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -149,6 +149,8 @@ public class Unit : MonoBehaviour
 
         if (!collision.collider.CompareTag("Unit"))
             return;
+        if (collision.collider.CompareTag("Unit"))
+            ChangeSprite();
 
         Unit otherUnit = collision.gameObject.GetComponent<Unit>();
         if (otherUnit == null)
@@ -174,7 +176,6 @@ public class Unit : MonoBehaviour
             {
                 Vector2 contactPos = collision.GetContact(0).point;
                 Explosion();
-
                 Hide(otherUnit.transform.position);
                 otherUnit.Hide(transform.position);
                 GenerateNextLevelUnit(contactPos);
@@ -216,10 +217,9 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds(0.005f);
         UnitManager.Instance.MergeComplete(Level, new Vector3(contactPos.x, contactPos.y, 0));
-        if (!sfx.canPlaySFX)
+        if (!MenuManager.Instance.canPlaySFX)
         {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
-            Debug.Log("Unit state is : " + sfx.canPlaySFX);
         }
     }
 
@@ -241,8 +241,6 @@ public class Unit : MonoBehaviour
     }
 
     //-------------------------------------------------------------------------------------------------
-
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish"))
@@ -251,6 +249,7 @@ public class Unit : MonoBehaviour
             if (deadTime > 2)
             {
                 spriteRenderer.color = Color.red;
+                ChangeSprite();
 
             }
             if (deadTime > 2.5)
@@ -269,4 +268,26 @@ public class Unit : MonoBehaviour
             spriteRenderer.color = Color.white;
         }
     }
+    private void ChangeSprite()
+    {
+        if (unitSO[(int)Level].spriteAnimation == null)
+            return;
+
+        originalSprite = spriteRenderer.sprite;
+
+        // Change the sprite
+        spriteRenderer.sprite = unitSO[(int)Level].spriteAnimation;
+
+        // Start a coroutine to revert the sprite after 1 second
+        StartCoroutine(RevertSprite(originalSprite, 1.0f));
+    }
+
+    private IEnumerator RevertSprite(Sprite originalSprite, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Revert the sprite back to the original sprite
+        spriteRenderer.sprite = originalSprite;
+    }
+
 }

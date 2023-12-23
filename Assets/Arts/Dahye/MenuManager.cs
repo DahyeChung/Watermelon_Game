@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : SingletonMonoBehaviour<MenuManager>
 {
     [Header("Activation")]
     [SerializeField] private GameObject settingCanvas;
@@ -20,18 +20,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button btn_Sound_OFF;   // ON OFF sfx
     [SerializeField] private Button btn_Setting;     // Slide up setting panel
     [SerializeField] private Button btn_Setting2;    // Slide up setting panel
-    [SerializeField] private Button btn_Pause;       // Pause game
-    [SerializeField] private Button btn_Continue;    // Resume game
-    [SerializeField] private Button btn_ReStart;    // Restart in setting || in-game over
-    [SerializeField] private Button btn_GameExit;   // Exit application
+    [SerializeField] private Button btn_ReStart;     // Restart in setting 
+    [SerializeField] private Button btn_ReStart2;     // Restart in-game over
+    [SerializeField] private Button btn_GameExit;    // Exit application
 
     public bool canPlaySFX;
-    //public bool IsSoundOff
-    //{
-    //    get { return isSoundOff; }
-    //    set { isSoundOff = value; }
-    //}
-
 
     public void Start()
     {
@@ -42,6 +35,7 @@ public class MenuManager : MonoBehaviour
         AddListener(btn_Setting, OnSettingToggle);
         AddListener(btn_Setting2, OnSettingToggle);
         AddListener(btn_ReStart, OnRestartGame);
+        AddListener(btn_ReStart2, OnRestartGame);
         AddListener(btn_GameExit, OnExitGame);
     }
 
