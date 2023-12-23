@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private UnitScriptableObject[] unitSO;
     [SerializeField] private float dropSpeed = -1;
     [SerializeField] private float impactField;
     [SerializeField] private float impactForce;
@@ -135,7 +134,7 @@ public class Unit : MonoBehaviour
         isMovable = false;
         rigidbody.simulated = true;
         UnitManager.Instance.DropComplete();
-        if (!MenuManager.Instance.canPlaySFX)
+        if (MenuManager.Instance.canPlaySFX)
         {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         }
@@ -217,7 +216,7 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds(0.005f);
         UnitManager.Instance.MergeComplete(Level, new Vector3(contactPos.x, contactPos.y, 0));
-        if (!MenuManager.Instance.canPlaySFX)
+        if (MenuManager.Instance.canPlaySFX)
         {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.MergeSfx);
         }
@@ -270,17 +269,22 @@ public class Unit : MonoBehaviour
     }
     private void ChangeSprite()
     {
-        if (unitSO[(int)Level].spriteAnimation == null)
+        if (UnitManager.Instance.unitSO == null || (int)Level >= UnitManager.Instance.unitSO.Length || UnitManager.Instance.unitSO[(int)Level].spriteAnimation == null)
+        {
+            Debug.LogError("Invalid unitSO array or Level." + (int)Level + "Length is " + UnitManager.Instance.unitSO.Length);
             return;
+        }
 
         originalSprite = spriteRenderer.sprite;
 
         // Change the sprite
-        spriteRenderer.sprite = unitSO[(int)Level].spriteAnimation;
+        spriteRenderer.sprite = UnitManager.Instance.unitSO[(int)Level].spriteAnimation;
+        ;
 
         // Start a coroutine to revert the sprite after 1 second
         StartCoroutine(RevertSprite(originalSprite, 1.0f));
     }
+
 
     private IEnumerator RevertSprite(Sprite originalSprite, float delay)
     {

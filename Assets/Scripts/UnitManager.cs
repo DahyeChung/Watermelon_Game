@@ -10,7 +10,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     [SerializeField] private Transform nextPosition;
 
-    [SerializeField] private UnitScriptableObject[] unitSO;
+    public UnitScriptableObject[] unitSO;
 
     [SerializeField] private MenuManager Menu;
 

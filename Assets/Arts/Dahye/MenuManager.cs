@@ -107,7 +107,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 
     public void OffSFX()
     {
-        SoundManager.Instance.SetEffectVolume(0.5f);
+        SoundManager.Instance.SetEffectVolume(0f);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         SoundManager.Instance.PauseSFX();
         SFXon.SetActive(false);
@@ -118,7 +118,6 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 
     public void OnSFX()
     {
-        SoundManager.Instance.SetEffectVolume(0.5f);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         SoundManager.Instance.ResumeSFX();
         SFXon.SetActive(true);
@@ -128,7 +127,6 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 
     public void OnRestartGame()
     {
-        SoundManager.Instance.SetEffectVolume(0.5f);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         gameOverCanvas.SetActive(false);
 
