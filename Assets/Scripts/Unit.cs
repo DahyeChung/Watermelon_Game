@@ -12,6 +12,9 @@ public class Unit : MonoBehaviour
     public UnitLevel Level;
     private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
+    private Sprite originSprite;
+    private Sprite eventSprite;
+    private bool isSpriteChanged = false;
     private Touch touch;
 
     public bool isMerged;
@@ -19,9 +22,9 @@ public class Unit : MonoBehaviour
     private bool isMovable = false;
     private bool isNext = false;
     public bool IsInit = false;
+    private bool isAwake = false;
 
     private float deadTime;
-    private Sprite originalSprite;
 
 
     private void Awake()
@@ -33,31 +36,39 @@ public class Unit : MonoBehaviour
         rigidbody.velocity = new Vector3(0, dropSpeed, 0);
         circleCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        isAwake = true;
 
     }
-    public void InitDropUnit(UnitLevel unitLevel)
+    public void InitDropUnit(UnitLevel unitLevel, Sprite sprite)
     {
+        originSprite = this.spriteRenderer.sprite;
+        eventSprite = sprite;
         Level = unitLevel;
         rigidbody.simulated = false;
         isMovable = true;
-        IsInit = true;
         UnitManager.Instance.EnableDropLine();
+        IsInit = true;
     }
 
     public void InitNextUnit(UnitLevel unitLevel)
     {
+        originSprite = this.spriteRenderer.sprite;
+        eventSprite = originSprite;
+
         this.isNext = true;
         Level = unitLevel;
         this.isMovable = false;
-        IsInit = true;
         rigidbody.simulated = false;
+        IsInit = true;
     }
-    public void InitMergedUnit(UnitLevel unitLevel)
+    public void InitMergedUnit(UnitLevel unitLevel, Sprite sprite)
     {
+        originSprite = this.spriteRenderer.sprite;
+        eventSprite = sprite;
         Level = unitLevel;
         this.isMovable = false;
-        IsInit = true;
         rigidbody.simulated = true;
+        IsInit = true;
     }
 
     private void FixedUpdate()
@@ -143,11 +154,12 @@ public class Unit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (this.isNext)
+        if (this.isNext || !this.IsInit)
             return;
 
         if (!collision.collider.CompareTag("Unit"))
             return;
+
         if (collision.collider.CompareTag("Unit"))
             ChangeSprite();
 
@@ -269,29 +281,21 @@ public class Unit : MonoBehaviour
     }
     private void ChangeSprite()
     {
-        if (UnitManager.Instance.unitSO == null || (int)Level >= UnitManager.Instance.unitSO.Length || UnitManager.Instance.unitSO[(int)Level].spriteAnimation == null)
-        {
-            Debug.LogError("Invalid unitSO array or Level." + (int)Level + "Length is " + UnitManager.Instance.unitSO.Length);
+        if (isSpriteChanged)
             return;
-        }
 
-        originalSprite = spriteRenderer.sprite;
-
-        // Change the sprite
-        spriteRenderer.sprite = UnitManager.Instance.unitSO[(int)Level].spriteAnimation;
-        ;
+        this.isSpriteChanged = true;
+        this.spriteRenderer.sprite = this.eventSprite;
 
         // Start a coroutine to revert the sprite after 1 second
-        StartCoroutine(RevertSprite(originalSprite, 1.0f));
+        StartCoroutine(RevertSprite(1.0f));
     }
 
-
-    private IEnumerator RevertSprite(Sprite originalSprite, float delay)
+    // Revert the sprite back to the original sprite
+    private IEnumerator RevertSprite(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        // Revert the sprite back to the original sprite
-        spriteRenderer.sprite = originalSprite;
+        this.spriteRenderer.sprite = this.originSprite;
+        this.isSpriteChanged = false;
     }
-
 }

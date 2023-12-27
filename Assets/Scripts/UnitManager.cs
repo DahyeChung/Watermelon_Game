@@ -4,40 +4,31 @@ using UnityEngine;
 
 public class UnitManager : SingletonMonoBehaviour<UnitManager>
 {
-    private int MaxLevel = 0;
-
+    public UnitScriptableObject[] unitSO;
+    public GameObject dropLine;
     public Transform dropPosition;
 
     [SerializeField] private Transform nextPosition;
-
-    public UnitScriptableObject[] unitSO;
-
     [SerializeField] private MenuManager Menu;
-
-    public GameObject dropLine;
-
-    private Unit nextUnit;
-
-    private UnitLevel nextUnitLevel = UnitLevel.Level0;
-
-    private bool isDropped = true;
-
     private Dictionary<int, UnitLevel> unitRandom = new();
+    private Unit nextUnit;
+    private UnitLevel nextUnitLevel = UnitLevel.Level0;
+    private bool isDropped = true;
 
     private void Start()
     {
+        if (GameManager_DH.Instance.IsGameOver)
+            return;
 
         int percent = 0;
         foreach (var unit in unitSO)
         {
             if (!unit.canCreate)
                 continue;
+
             percent += unit.createPercent;
             unitRandom.Add(percent, unit.unitLevel);
         }
-
-        if (GameManager_DH.Instance.IsGameOver)
-            return;
 
         this.DisableDropLine();
 
@@ -54,22 +45,24 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         CreateUnit();
     }
-
+    /// <summary>
+    /// 기능 : 충돌완료 시 다음레벨유닛을 생성하고 Unit스트립트 컴포넌트를 담습니다.
+    /// </summary>
+    /// <param name="unitLevel">스크립터블 오브젝트에 담긴 유닛 별 레벨 정보. 타입 : Enum UnitLevel </param>
+    /// <param name="position">충돌 포지션을 담아주세요. 다음레벨 생성위치가 됩니다. </param>
+    /// <returns>  </returns>
     public void MergeComplete(UnitLevel unitLevel, Vector3 position)
     {
         unitLevel += 1;
-        this.MaxLevel = Mathf.Max((int)unitLevel, this.MaxLevel);
-        //Max Level
-        //if (this.MaxLevel < 3)
-        //    this.MaxLevel = Mathf.Max((int)unitLevel, this.MaxLevel);
-
+        // 생성할 다음 레벨의 프리팹 할당
         var nextLevelPrefab = GetLevelPrefab(unitLevel);
+
         if (nextLevelPrefab == null)
         {
             Debug.Log("Next level prefab is null");
             return;
         }
-
+        // 프리팹 생성 후 Unit 기능 부여
         var nextLevelUnit = Instantiate(nextLevelPrefab, position, Quaternion.identity).GetComponent<Unit>();
         if (nextLevelUnit == null)
         {
@@ -77,59 +70,79 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             return;
         }
 
-        nextLevelUnit.InitMergedUnit(unitLevel);
+        nextLevelUnit.InitMergedUnit(unitLevel, this.GetLevelSprite(unitLevel));
         if (unitLevel != this.unitSO[(int)unitLevel].unitLevel)
         {
             Debug.Log("error");
         }
-
         GameManager_DH.Instance.AddScore(GetLevelScore(unitLevel));
     }
-
+    /// <summary>
+    /// 기능 : 드롭 완료 후 0.5초의 대기를 보장합니다.
+    /// </summary>
     public void DropComplete()
     {
-        // this.DisableDropLine();
         StartCoroutine(PauseFunctionForSeconds(0.5f));
     }
-
     private IEnumerator PauseFunctionForSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         isDropped = true;
     }
-
+    /// <summary>
+    /// 기능 : 원하는 레벨에 맞는 프리팹 형태를 가져옵니다.
+    /// </summary>
+    /// <param name="level">대상 유닛의 레벨 SO를 받습니다.</param>
+    /// <returns>"GameObject" 타입 프리팹 반환</returns>
     private GameObject GetLevelPrefab(UnitLevel level)
     {
         return level > UnitLevel.Level10 ? unitSO[(int)UnitLevel.Level10].unitPrefabs : unitSO[(int)level].unitPrefabs;
     }
-
+    /// <summary>
+    /// 기능 : 원하는 레벨에 맞는 스프라이트 이미지 SO를 가져옵니다.
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns>"Sprite" 타입의 이미지 반환</returns>
+    private Sprite GetLevelSprite(UnitLevel level)
+    {
+        return level > UnitLevel.Level10 ? unitSO[(int)UnitLevel.Level10].spriteAnimation : unitSO[(int)level].spriteAnimation;
+    }
+    /// <summary>
+    /// 기능 : 원하는 레벨에 맞는 스코어 정보 SO를 가져옵니다.
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns>"int" 타입의 점수 반환</returns>
     private int GetLevelScore(UnitLevel level)
     {
         return unitSO[(int)level].score;
     }
-
+    /// <summary>
+    /// 기능 : 유닛의 레벨을 랜덤으로 결정합니다.
+    /// </summary>
+    /// <returns>"UnitLevel" 타입의 레벨정보를 반환합니다. (Enum)</returns>
     private UnitLevel GetNextUnitLevelIndex()
     {
         int random = Random.Range(0, 100);
-        int calculateNum = 0;
         foreach (var dic in unitRandom)
         {
-            calculateNum = dic.Key;
-            if (calculateNum >= random)
-            {
+            if (dic.Key >= random)
                 return dic.Value;
-            }
         }
         return UnitLevel.Level0;
-        //return (UnitLevel)UnityEngine.Random.Range(0, 5);
-        //return (UnitLevel)UnityEngine.Random.Range(0, this.MaxLevel + 2);
     }
+    /// <summary>
+    /// 기능 : "Int"타입의 Index에 맞는 프리팹 SO를 가져옵니다.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns>"GameObject" 타입의 프리팹을 반환합니다.</returns>
 
     private GameObject GetUnitPrefab(int index)
     {
         return unitSO[index].unitPrefabs;
     }
-
+    /// <summary>
+    /// 기능 : 
+    /// </summary>
     private void CreateDropUnit()
     {
         var prefab = GetUnitPrefab((int)this.nextUnitLevel);
@@ -146,7 +159,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             return;
         }
 
-        unit.InitDropUnit(this.nextUnitLevel);
+        unit.InitDropUnit(this.nextUnitLevel, this.GetLevelSprite(this.nextUnitLevel));
 
         if (Menu == null)
             Debug.Log("UnitManager.uiAnimation is null");
