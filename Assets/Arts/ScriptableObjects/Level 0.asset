@@ -16,5 +16,5 @@ MonoBehaviour:
   unitPrefabs: {fileID: 5718502485833086766, guid: 74b3a72a68a3dff46889133bc7438c3c, type: 3}
   spriteAnimation: {fileID: 21300000, guid: 4e1bd2e1af01a274abda2557c374fa8c, type: 3}
   score: 0
-  createPercent: 30
+  createPercent: 25
   canCreate: 1

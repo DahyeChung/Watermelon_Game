@@ -14,6 +14,7 @@ public class GameManager_DH : SingletonMonoBehaviour<GameManager_DH>
 
     public void AddScore(int score)
     {
+        score = 1999;
         this.Score += score;
         UpdateScoreUI();
     }
