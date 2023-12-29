@@ -37,6 +37,15 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         AddListener(btn_ReStart, OnRestartGame);
         AddListener(btn_ReStart2, OnRestartGame);
         AddListener(btn_GameExit, OnExitGame);
+        InitButtons();
+    }
+
+    private void InitButtons()
+    {
+        settingCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
+        BGMoff.SetActive(false);
+        SFXoff.SetActive(false);
     }
 
     //============UI ANIMATIONS==========================================================

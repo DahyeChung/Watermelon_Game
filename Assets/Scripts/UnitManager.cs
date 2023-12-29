@@ -8,11 +8,11 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     public GameObject dropLine;
     public Transform dropPosition;
 
-    [SerializeField] private Transform nextPosition;
+    [SerializeField] private Transform previewPosition;
     [SerializeField] private MenuManager Menu;
     private Dictionary<int, UnitLevel> unitRandom = new();
-    private Unit nextUnit;
-    private UnitLevel nextUnitLevel = UnitLevel.Level0;
+    private Unit previewUnit;
+    private UnitLevel previewUnitLevel = UnitLevel.Level0;
     private bool isDropped = true;
 
     private void Start()
@@ -34,14 +34,14 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
         SoundManager.Instance.PlayBGM(SoundManager.Instance.BGM);
 
-        var prefab = GetUnitPrefab((int)this.nextUnitLevel);
+        var prefab = GetUnitPrefab((int)this.previewUnitLevel);
         if (prefab == null)
         {
             Debug.Log("Start() get unit prefab failed.");
         }
 
-        this.nextUnit = Instantiate(prefab, this.nextPosition).GetComponent<Unit>();
-        this.nextUnit.InitNextUnit(this.nextUnitLevel);
+        this.previewUnit = Instantiate(prefab, this.previewPosition).GetComponent<Unit>();
+        this.previewUnit.InitNextUnit(this.previewUnitLevel);
 
         CreateUnit();
     }
@@ -145,7 +145,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
     /// </summary>
     private void CreateDropUnit()
     {
-        var prefab = GetUnitPrefab((int)this.nextUnitLevel);
+        var prefab = GetUnitPrefab((int)this.previewUnitLevel);
         if (prefab == null)
         {
             Debug.Log("CreateDropUnit : not found prefab");
@@ -159,7 +159,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
             return;
         }
 
-        unit.InitDropUnit(this.nextUnitLevel, this.GetLevelSprite(this.nextUnitLevel));
+        unit.InitDropUnit(this.previewUnitLevel, this.GetLevelSprite(this.previewUnitLevel));
 
         if (Menu == null)
             Debug.Log("UnitManager.uiAnimation is null");
@@ -170,25 +170,25 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private void CreateNextUnit()
     {
-        this.nextUnitLevel = GetNextUnitLevelIndex();
+        this.previewUnitLevel = GetNextUnitLevelIndex();
 
-        Destroy(this.nextUnit.gameObject);
+        Destroy(this.previewUnit.gameObject);
 
-        var prefab = GetUnitPrefab((int)this.nextUnitLevel);
+        var prefab = GetUnitPrefab((int)this.previewUnitLevel);
         if (prefab == null)
         {
             Debug.Log("CreateNextUnit : not found prefab");
             return;
         }
 
-        this.nextUnit = Instantiate(prefab, this.nextPosition).GetComponent<Unit>();
-        if (this.nextUnit == null)
+        this.previewUnit = Instantiate(prefab, this.previewPosition).GetComponent<Unit>();
+        if (this.previewUnit == null)
         {
             Debug.Log("CreateNextUnit : unit instantiate failed.");
             return;
         }
 
-        this.nextUnit.InitNextUnit(this.nextUnitLevel);
+        this.previewUnit.InitNextUnit(this.previewUnitLevel);
 
     }
 

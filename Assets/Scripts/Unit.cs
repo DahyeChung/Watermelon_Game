@@ -39,6 +39,13 @@ public class Unit : MonoBehaviour
         isAwake = true;
 
     }
+    private void FixedUpdate()
+    {
+        if (!isNext)
+        {
+            HorizontalMove();
+        }
+    }
     public void InitDropUnit(UnitLevel unitLevel, Sprite sprite)
     {
         originSprite = this.spriteRenderer.sprite;
@@ -69,14 +76,6 @@ public class Unit : MonoBehaviour
         this.isMovable = false;
         rigidbody.simulated = true;
         IsInit = true;
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isNext)
-        {
-            HorizontalMove();
-        }
     }
 
     private void HorizontalMove()

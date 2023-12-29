@@ -1,7 +1,5 @@
 using UnityEngine;
-/// <summary>
-/// mono behaviour singleton pattern
-/// </summary>
+
 public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
     /// <summary>
