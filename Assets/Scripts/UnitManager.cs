@@ -17,6 +17,10 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+        MenuManager.Instance.canPlaySFX = true;
+
+
         if (GameManager_DH.Instance.IsGameOver)
             return;
 
@@ -164,7 +168,7 @@ public class UnitManager : SingletonMonoBehaviour<UnitManager>
         if (Menu == null)
             Debug.Log("UnitManager.uiAnimation is null");
 
-        Menu.ScaleAnim(unit.gameObject, 1.5f);
+        Menu.UnitScaleAnim(unit.gameObject, 1.5f);
         this.dropLine.transform.localScale = Vector3.one;
     }
 

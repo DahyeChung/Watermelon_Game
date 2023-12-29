@@ -49,7 +49,13 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     }
 
     //============UI ANIMATIONS==========================================================
-    public void ScaleAnim(GameObject obj, float scaleSize)
+    public void ScoreScaleAnim(GameObject obj, float scaleSize)
+    {
+        LeanTween.cancel(obj);
+        obj.transform.localScale = Vector2.one;
+        LeanTween.scale(obj, new Vector2(scaleSize, scaleSize), 1f).setEasePunch();
+    }
+    public void UnitScaleAnim(GameObject obj, float scaleSize)
     {
         LeanTween.cancel(obj);
         gameObject.transform.localScale = Vector2.one;
@@ -122,7 +128,6 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         SFXon.SetActive(false);
         SFXoff.SetActive(true);
         canPlaySFX = false;
-        Debug.Log("Menu Manager state is : " + canPlaySFX);
     }
 
     public void OnSFX()

@@ -1222,12 +1222,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsGameOver: 0
   Score: 0
-  scorePoints: {fileID: 1622915008}
+  scorePoints: {fileID: 742672176}
+  scoreAnimScale: 2
   scoreTextInGame: {fileID: 742672178}
   scoreTextGameOver: {fileID: 1868769512}
   Menu: {fileID: 2131443165}
-  settingsPanelController: {fileID: 0}
-  isSettingOn: 0
 --- !u!1001 &466096085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7167,7 +7166,7 @@ Transform:
   m_GameObject: {fileID: 2134062764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3076923, y: 5, z: 0}
+  m_LocalPosition: {x: 2.3316061, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

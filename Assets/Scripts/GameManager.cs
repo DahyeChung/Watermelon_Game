@@ -30,7 +30,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             scoreTextInGame.text = Score.ToString();
             scoreTextGameOver.text = Score.ToString();
-            Menu.ScaleAnim(scorePoints, 1.5f);
+            Menu.ScoreScaleAnim(scorePoints, 1.5f);
         }
     }
 
