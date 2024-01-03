@@ -14,7 +14,6 @@ public class GameManager_DH : SingletonMonoBehaviour<GameManager_DH>
 
     public void AddScore(int score)
     {
-        score = 1999;
         this.Score += score;
         UpdateScoreUI();
     }
@@ -35,6 +34,5 @@ public class GameManager_DH : SingletonMonoBehaviour<GameManager_DH>
         scoreTextInGame = scoreTextGameOver;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.FinishBell);
         Menu.OnGameOverCanvas();
-        Debug.Log("Game Over");
     }
 }

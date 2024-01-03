@@ -11,6 +11,10 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     [SerializeField] private GameObject BGMoff;
     [SerializeField] private GameObject SFXon;
     [SerializeField] private GameObject SFXoff;
+    [SerializeField] private GameObject infoOn;
+    [SerializeField] private GameObject infoBG;
+    [SerializeField] private GameObject Cross;
+    [SerializeField] private GameObject CrossInfo;
     [SerializeField] private float animationSpeed;
     [Space(10)]
     [Header("Buttons")]
@@ -18,11 +22,15 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     [SerializeField] private Button btn_BGM_OFF;     // ON OFF music
     [SerializeField] private Button btn_Sound_ON;    // ON OFF sfx
     [SerializeField] private Button btn_Sound_OFF;   // ON OFF sfx
+    [SerializeField] private Button btn_InfoOn;      // ON info pannel
+    [SerializeField] private Button btn_InfoOFF;     // OFF info pannel
     [SerializeField] private Button btn_Setting;     // Slide up setting panel
     [SerializeField] private Button btn_Setting2;    // Slide up setting panel
+    [SerializeField] private Button btn_OFFsetting;    // OFF Setting
     [SerializeField] private Button btn_ReStart;     // Restart in setting 
-    [SerializeField] private Button btn_ReStart2;     // Restart in-game over
+    [SerializeField] private Button btn_ReStart2;    // Restart in-game over
     [SerializeField] private Button btn_GameExit;    // Exit application
+
 
     public bool canPlaySFX;
 
@@ -34,9 +42,12 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         AddListener(btn_Sound_ON, OffSFX);
         AddListener(btn_Setting, OnSettingToggle);
         AddListener(btn_Setting2, OnSettingToggle);
+        AddListener(btn_OFFsetting, OnSettingExitToggle);
         AddListener(btn_ReStart, OnRestartGame);
         AddListener(btn_ReStart2, OnRestartGame);
         AddListener(btn_GameExit, OnExitGame);
+        AddListener(btn_InfoOn, OnInfo);
+        AddListener(btn_InfoOFF, OFFInfo);
         InitButtons();
     }
 
@@ -46,6 +57,9 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         gameOverCanvas.SetActive(false);
         BGMoff.SetActive(false);
         SFXoff.SetActive(false);
+        infoOn.SetActive(false);
+        infoBG.SetActive(false);
+        CrossInfo.SetActive(false);
     }
 
     //============UI ANIMATIONS==========================================================
@@ -90,6 +104,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         SoundManager.Instance.SetEffectVolume(0.5f);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
         settingCanvas.SetActive(true);
+        Cross.SetActive(true);
         LeanTween.moveLocal(settingCanvas, new Vector3(0f, 2f, 0f), 0.01f).setEase(LeanTweenType.easeOutBounce);
         Time.timeScale = 0f;
 
@@ -146,6 +161,26 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+
+    public void OnInfo()
+    {
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
+        infoOn.SetActive(true);
+        infoBG.SetActive(true);
+        Cross.SetActive(false);
+        CrossInfo.SetActive(true);
+    }
+    public void OFFInfo()
+    {
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.DropSfx);
+        infoOn.SetActive(false);
+        infoBG.SetActive(false);
+        Cross.SetActive(true);
+        CrossInfo.SetActive(false);
+        OnSettingToggle();
+
+
     }
 
     public void OnExitGame()
