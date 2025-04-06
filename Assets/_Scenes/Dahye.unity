@@ -1685,16 +1685,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Watermelon Game : Winter Holiday
+  m_text: 'Credits
 
-    made by Dahye Chung
+    Programmer: Dahye Chung
 
-    Version
-    1.0
-
+    Designer: Subi Lee
 
 
-    Image Reference
+
+    Image
+    Reference
 
     https://kor.pngtree.com/freepng/colorful-christmas-frame-with-decorations_13770778.html?sol=downref&id=bef
 
@@ -5331,7 +5331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -197.90991}
+  m_AnchoredPosition: {x: 0, y: -197.91016}
   m_SizeDelta: {x: 367.19, y: 156.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1622915010
@@ -7300,7 +7300,7 @@ Transform:
   m_GameObject: {fileID: 2134062764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.368421, y: 5, z: 0}
+  m_LocalPosition: {x: 2.3316061, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
