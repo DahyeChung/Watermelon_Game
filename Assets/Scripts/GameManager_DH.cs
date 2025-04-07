@@ -34,5 +34,16 @@ public class GameManager_DH : SingletonMonoBehaviour<GameManager_DH>
         scoreTextInGame = scoreTextGameOver;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.FinishBell);
         Menu.OnGameOverCanvas();
+
+        // PlayfabManager를 통해 리더보드에 현재 점수 제출
+        PlayfabManager playfabManager = FindObjectOfType<PlayfabManager>();
+        if (playfabManager != null)
+        {
+            playfabManager.SendLeaderBoard(Score);
+        }
+        else
+        {
+            Debug.LogError("PlayfabManager가 씬에 없습니다!");
+        }
     }
 }
