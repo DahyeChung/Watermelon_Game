@@ -24,7 +24,6 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
     [SerializeField] private Button btn_Sound_OFF;   // ON OFF sfx
     [SerializeField] private Button btn_InfoOn;      // ON info pannel
     [SerializeField] private Button btn_InfoOFF;     // OFF info pannel
-    [SerializeField] private Button btn_Setting;     // Slide up setting panel
     [SerializeField] private Button btn_Setting2;    // Slide up setting panel
     [SerializeField] private Button btn_OFFsetting;    // OFF Setting
     [SerializeField] private Button btn_ReStart;     // Restart in setting 
@@ -40,7 +39,6 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
         AddListener(btn_BGM_ON, OffBGM);
         AddListener(btn_Sound_OFF, OnSFX);
         AddListener(btn_Sound_ON, OffSFX);
-        AddListener(btn_Setting, OnSettingToggle);
         AddListener(btn_Setting2, OnSettingToggle);
         AddListener(btn_OFFsetting, OnSettingExitToggle);
         AddListener(btn_ReStart, OnRestartGame);
@@ -193,4 +191,7 @@ public class MenuManager : SingletonMonoBehaviour<MenuManager>
                 Application.Quit();
 #endif
     }
+
+
+
 }

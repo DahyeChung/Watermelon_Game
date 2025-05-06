@@ -12,6 +12,17 @@ public class GameManager_DH : SingletonMonoBehaviour<GameManager_DH>
     public TextMeshProUGUI scoreTextGameOver;
     public MenuManager Menu;
 
+
+    private void Update()
+    {
+        Debug.Log("업데이트 잘 돌아가?");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("게임 끝낼게요~");
+            GameOver();
+        }
+    }
+
     public void AddScore(int score)
     {
         this.Score += score;

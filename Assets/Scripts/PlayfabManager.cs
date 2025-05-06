@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class PlayfabManager : MonoBehaviour
 {
+    private string GameId = "5C96C"; // from playfab
+    private string statisticName = "GameScore";  // from playfab
+    private int maxReultCount = 100; // Max players on leaderboard
+
     private void Start()
     {
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
-            PlayFabSettings.staticSettings.TitleId = "5C96C"; // from playfab
+            PlayFabSettings.staticSettings.TitleId = GameId;
 
         LogIn();
     }
@@ -41,7 +45,7 @@ public class PlayfabManager : MonoBehaviour
             {
                 new StatisticUpdate
                 {
-                    StatisticName = "GameScore", // from playfab
+                    StatisticName = statisticName,
                     Value = score
                 }
             }
@@ -50,12 +54,31 @@ public class PlayfabManager : MonoBehaviour
     }
     void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
     {
-        Debug.Log("Successfully updated player score.");
+        Debug.Log("Successfully updated leaderboard sent.");
     }
 
     void OnError(PlayFabError error)
     {
         Debug.Log("Error while updating leaderboard: " + error.ErrorMessage);
         Debug.LogError(error.GenerateErrorReport());
+    }
+
+    public void GetLeaderBoard()
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = statisticName,
+            StartPosition = 0,
+            MaxResultsCount = maxReultCount
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
+    }
+
+    void OnLeaderboardGet(GetLeaderboardResult result)
+    {
+        foreach (var item in result.Leaderboard)
+        {
+            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
+        }
     }
 }
